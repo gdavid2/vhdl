@@ -1,0 +1,37 @@
+|cmp
+clk => output~reg0.CLK
+input[0] => LessThan0.IN16
+input[1] => LessThan0.IN15
+input[2] => LessThan0.IN14
+input[3] => LessThan0.IN13
+input[4] => LessThan0.IN12
+input[5] => LessThan0.IN11
+input[6] => LessThan0.IN10
+input[7] => LessThan0.IN9
+input[8] => LessThan0.IN8
+input[9] => LessThan0.IN7
+input[10] => LessThan0.IN6
+input[11] => LessThan0.IN5
+input[12] => LessThan0.IN4
+input[13] => LessThan0.IN3
+input[14] => LessThan0.IN2
+input[15] => LessThan0.IN1
+seuil[0] => LessThan0.IN32
+seuil[1] => LessThan0.IN31
+seuil[2] => LessThan0.IN30
+seuil[3] => LessThan0.IN29
+seuil[4] => LessThan0.IN28
+seuil[5] => LessThan0.IN27
+seuil[6] => LessThan0.IN26
+seuil[7] => LessThan0.IN25
+seuil[8] => LessThan0.IN24
+seuil[9] => LessThan0.IN23
+seuil[10] => LessThan0.IN22
+seuil[11] => LessThan0.IN21
+seuil[12] => LessThan0.IN20
+seuil[13] => LessThan0.IN19
+seuil[14] => LessThan0.IN18
+seuil[15] => LessThan0.IN17
+output << output~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
