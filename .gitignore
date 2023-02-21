@@ -1,2 +1,6 @@
+**/*.*
+**/incremental_db
+**/simulation
+
 !**/*.vhd
 !**/*.sdc
