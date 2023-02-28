@@ -23,6 +23,7 @@ end entity;
 architecture seq of mli_compl is
 
 	signal avs_ui_clr: std_logic;
+	signal end_cycle_irq: std_logic;
 	
 --	registres
 	signal registre_etat:    std_logic_vector(2 downto 0);
@@ -39,6 +40,7 @@ begin
 													  avs_write,
 													  avs_readdata,
 													  avs_writedata,
+													  end_cycle_irq,
 													  avs_ui_clr,
 													  registre_etat,
 													  time_output_high,
@@ -48,11 +50,18 @@ begin
 
 	operation: entity work.mli port map(csi_clk,
 													avs_ui_clr,
+													registre_etat(2),
 													time_output_high,
 													dead_time,
 													half_period,
 													Sh,
-													Sl
-													);
+													Sl,
+													end_cycle_irq);
+													
+	interruption: entity work.irq_gen port map(csi_clk,
+	                                           avs_ui_clr,
+															 registre_etat,
+															 ins_irq);
+															 
 
 end architecture;

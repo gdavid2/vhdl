@@ -18,6 +18,8 @@ entity avs_ui is
 			avs_readdata: out std_logic_vector(15 downto 0);
 			avs_writedata: in std_logic_vector(15 downto 0);
 			
+			end_cycle_irq: in std_logic;
+			
 			clr: out std_logic;
 			
 --			registres
@@ -51,6 +53,7 @@ begin
 	begin
 		if reset= '1' then
 			clr_int <= '1';
+			avs_readdata_int <= (others => '0');
 			
 			registre_etat_int		<= "000";				  -- all off
 			time_output_high_int	<= "0000000000010000"; -- 16
@@ -84,7 +87,11 @@ begin
 --			idle ou interdit
 			when others =>
 				avs_readdata_int <= "0000000000000000";
-			
+				
+				if registre_etat_int(0)= '0' then
+					registre_etat_int(0) <= end_cycle_irq;
+				end if;
+				
 			end case;
 		end if;
 	end process;
