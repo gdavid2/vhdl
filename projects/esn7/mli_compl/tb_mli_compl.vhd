@@ -59,18 +59,28 @@ begin
 		wait;
 	end process;
 	
+	RD: process
+	begin
+		avs_read <= '0';
+		wait;
+	end process;
+	
 	WR: process
 	begin
 		avs_write <= '0',
 		             '1' after 40 ns,
-						 '0' after 60 ns;
+						 '0' after 60 ns,
+						 '1' after 1000 ns,
+						 '0' after 1100 ns;
 		wait;
 	end process;
 	
 	WRDATA: process
 	begin
 		avs_writedata <= (others => '0'),
-		                 (15 downto 14 => '1', others => '0') after 40 ns;
+		                 (15 downto 14 => '1', others => '0') after 40 ns,
+							  (others => '0') after 80 ns,
+							  (15 downto 14 => '1', 13 => '0', others => '0') after 1000 ns;
 		wait;
 	end process;
 
