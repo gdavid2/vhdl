@@ -48,14 +48,17 @@ begin
 	begin
 		csi_reset <= '1',
 		             '0' after 40 ns,
-						 '1' after 3000 ns,
-					    '0' after 3100 ns;
+						 '1' after 4500 ns,
+					    '0' after 4600 ns;
 		wait;
 	end process;
 	
 	ADDR: process
 	begin
-		avs_address <= "00";
+		avs_address <= "00",
+		               "11" after 1200 ns,
+							"10" after 2000 ns,
+							"01" after 3000 ns;
 		wait;
 	end process;
 	
@@ -71,7 +74,13 @@ begin
 		             '1' after 40 ns,
 						 '0' after 60 ns,
 						 '1' after 1000 ns,
-						 '0' after 1100 ns;
+						 '0' after 1100 ns,
+						 '1' after 1200 ns,
+						 '0' after 1250 ns,
+						 '1' after 2000 ns,
+						 '0' after 2100 ns,
+						 '1' after 3000 ns,
+						 '0' after 3100 ns;
 		wait;
 	end process;
 	
@@ -80,7 +89,10 @@ begin
 		avs_writedata <= (others => '0'),
 		                 (15 downto 14 => '1', others => '0') after 40 ns,
 							  (others => '0') after 80 ns,
-							  (15 downto 14 => '1', 13 => '0', others => '0') after 1000 ns;
+							  (15 downto 14 => '1', 13 => '0', others => '0') after 1000 ns,
+							  (6 => '1', others => '0') after 1200 ns,
+							  (2 => '1', others => '0') after 2000 ns,
+							  (4 downto 0 => '1', others => '0') after 3000 ns;
 		wait;
 	end process;
 
