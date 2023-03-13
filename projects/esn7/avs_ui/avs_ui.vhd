@@ -34,6 +34,8 @@ architecture seq of avs_ui is
 	signal clr_int: std_logic;
 	signal avs_readdata_int: std_logic_vector(15 downto 0);
 	
+--	commande : ( b3 , b2 ,  b1  ,  b0   )
+--	           ( address , read , write )
 	signal commande: std_logic_vector(3 downto 0);
 	
 -- bit 2 : MARCHE/ARRET: 		1 <= MARCHE, 0 <= ARRET
@@ -53,6 +55,7 @@ begin
 	begin
 		if reset= '1' then
 			clr_int <= '1';
+			
 			avs_readdata_int <= (others => '0');
 			
 			registre_etat_int		<= "000";				  -- all off
@@ -64,6 +67,7 @@ begin
 			clr_int <= '0';
 			
 			case commande is
+			
 --			read
 			when "0010" =>
 				avs_readdata_int <= registre_etat_int & "0000000000000";
@@ -84,7 +88,7 @@ begin
 			when "1101" =>
 				half_period_int 		<= avs_writedata;
 			
---			idle ou interdit
+--			idle ou interdit (write nxor read)
 			when others =>
 				avs_readdata_int <= "0000000000000000";
 				

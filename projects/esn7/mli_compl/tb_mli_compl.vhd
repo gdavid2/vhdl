@@ -46,31 +46,31 @@ begin
 	
 	RESET: process
 	begin
-		csi_reset <= '1',
-		             '0' after 40 ns,
-						 '1' after 4500 ns,
+		csi_reset <= '1',						--init
+		             '0' after 40 ns,		
+						 '1' after 4500 ns,	--test pour vérifier la raz des registres
 					    '0' after 4600 ns;
 		wait;
 	end process;
 	
 	ADDR: process
 	begin
-		avs_address <= "00",
-		               "11" after 1200 ns,
-							"10" after 2000 ns,
-							"01" after 3000 ns;
+		avs_address <= "00",						--registre_etat
+		               "11" after 1200 ns,	--half_period
+							"10" after 2000 ns,	--dead_time
+							"01" after 3000 ns; 	--time_output_high
 		wait;
 	end process;
 	
 	RD: process
 	begin
-		avs_read <= '0';
+		avs_read <= '0';	--tests en lecture déjà validés
 		wait;
 	end process;
 	
 	WR: process
 	begin
-		avs_write <= '0',
+		avs_write <= '0',						--test en écriture déjà validés
 		             '1' after 40 ns,
 						 '0' after 60 ns,
 						 '1' after 1000 ns,
@@ -87,11 +87,21 @@ begin
 	WRDATA: process
 	begin
 		avs_writedata <= (others => '0'),
+		
+--							  écriture dans le registre d'état, mise à 1 du bit marche/arret
 		                 (15 downto 14 => '1', others => '0') after 40 ns,
 							  (others => '0') after 80 ns,
+							  
+--							  mise à 0 du bit interrupt flag dans le registre d'etat
 							  (15 downto 14 => '1', 13 => '0', others => '0') after 1000 ns,
+							  
+--							  réglage de la demi-période
 							  (6 => '1', others => '0') after 1200 ns,
+							  
+--							  réglage du temps mort
 							  (2 => '1', others => '0') after 2000 ns,
+							  
+--							  réglage du temps à l'état haut
 							  (4 downto 0 => '1', others => '0') after 3000 ns;
 		wait;
 	end process;

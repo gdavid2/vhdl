@@ -23,6 +23,7 @@ end entity;
 architecture seq of mli_compl is
 
 	signal avs_ui_clr: std_logic;
+	
 	signal end_cycle_irq: std_logic;
 	
 --	registres

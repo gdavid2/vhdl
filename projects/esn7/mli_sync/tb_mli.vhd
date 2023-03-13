@@ -47,7 +47,7 @@ begin
 	begin
 		seuil_output_high <= "0000000000010000";
 		seuil_output_low  <= "0000000000011000";
-		half_period		  <= "0000000000100000";
+		half_period		   <= "0000000000100000";
 		wait;
 	end process;
 	
